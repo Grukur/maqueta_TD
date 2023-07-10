@@ -6,9 +6,11 @@ cloudinary.config({
     api_secret: process.env.STORAGE_SECRET,
 });
 
-export const uploadFiles = (req, res, next) => {
+export const uploadFilesCloud = (req, res, next) => {
     try {
         let foto = req.files.foto;
+        let size = foto.size
+        console.log(size)
         let formatosPermitidos = ["jpeg", "png", "webp", "gif", "svg"];
         let extension = `${foto.mimetype.split("/")[1]}`;
 
@@ -31,7 +33,6 @@ export const uploadFiles = (req, res, next) => {
                             "Error al subir la imagen en proceso de creación de producto.",
                     });
                 }
-                console.log('result: ',result);
                 req.nombreImagen = foto.name;
                 req.pathImagen = result.url;
                 req.imagenId = result.public_id;
@@ -47,7 +48,7 @@ export const uploadFiles = (req, res, next) => {
 };
 
 
-export const deleteFile = (imagenId) => {
+export const deleteFileCloud = (imagenId) => {
     cloudinary.uploader.destroy(imagenId, (error, result) =>{
         if (error) {
             return console.log("Error al eliminar la imagen del servicio cloud: ", error);

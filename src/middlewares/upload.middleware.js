@@ -2,7 +2,7 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const uploadFiles = (req, res, next) => {
+export const uploadFiles = (req, res, next) => {
     try {
         let foto = req.files.foto;
         let formatosPermitidos = ["jpeg", "png", "webp", "gif", "svg"];
@@ -41,4 +41,3 @@ const uploadFiles = (req, res, next) => {
     }
 };
 
-export default uploadFiles;

@@ -20,15 +20,14 @@ export const emitToken = async (req, res, next) => {
         },
         process.env.PASSWORD_SECRET
     );
-    console.log(token);
     req.token = token;
+    console.log('Token given')
     next();
 };
 
 export const verifyToken = (req, res, next) => {
     try {
         let { token } = req.query;
-        console.log(token);
         if (!token) {
              token = req.headers["authorization"];
              if (!token)
@@ -38,7 +37,6 @@ export const verifyToken = (req, res, next) => {
                          "ruta protegida, debe proporcionar un token de acceso."
                      );
              token = token.split(" ")[1];
-             console.log(token);
              if (token.length == 0) {
                  throw new Error("No se ha proporcionado un token");
              }
@@ -68,6 +66,7 @@ export const verifyToken = (req, res, next) => {
                         });
                     }
                     req.usuario = usuario;
+                    console.log('Token succes verify')
                     next();
                 } catch (error) {
                     res.status(500).json({code: 500, message: "Error en autencicación."})
@@ -91,5 +90,6 @@ export const validarAdmin = async (req, res, next) => {
             message: "Usted no tiene los permisos necesarios para continuar.",
         });
     }
+    console.log(`${usuario} is admin`)
     next();
 };

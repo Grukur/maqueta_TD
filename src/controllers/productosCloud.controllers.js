@@ -1,5 +1,5 @@
 import Producto from "../models/Producto.models.js";
-import { deleteFile } from "../middlewares/uploadCloud.middleware.js";
+import { deleteFileCloud } from "../middlewares/uploadCloud.middleware.js";
 
 
 export const findAllProductos = async (req, res) => {
@@ -42,7 +42,7 @@ export const addProductos = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        deleteFile(req.imagenId);
+        deleteFileCloud(req.imagenId);
         res.status(500).json({
             code: 500,
             message: "Error al crear el producto en la base de datos.",
