@@ -28,6 +28,10 @@ const Producto = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        }
     },
     {
         timestamps: true,

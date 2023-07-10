@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { addUsuario, login, findAllUsuarios } from "../controllers/usuarios.controllers.js";
-import {emitToken} from "../middlewares/auth.middleware.js"
+import { addUsuario, login, findAllUsuarios, editUser, changeStatus, deleteUser  } from "../controllers/usuarios.controllers.js";
+import {emitToken, verifyToken, validateAdmin} from "../middlewares/auth.middleware.js"
 const router = Router();
 
 
@@ -9,5 +9,8 @@ const router = Router();
 router.get("/", findAllUsuarios);
 router.post("/", addUsuario);
 router.post("/login", emitToken, login);
+router.put("/", editUser);
+router.delete("/", changeStatus);
+router.delete("/destroy", deleteUser);
 
 export default router;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyToken, validarAdmin } from "../middlewares/auth.middleware.js";
+import { verifyToken, validateAdmin } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 //ruta post usuarios
@@ -15,7 +15,7 @@ router.get("/registro", (req, res) => {
     res.render("registro");
 });
 
-router.get("/dashboard", verifyToken, validarAdmin, (req, res) => {
+router.get("/dashboard", verifyToken, validateAdmin, (req, res) => {
     res.render("dashboard");
 });
 

@@ -46,12 +46,10 @@ export const verifyToken = (req, res, next) => {
             token,
             process.env.PASSWORD_SECRET,
             async (error, decoded) => {
-                console.log("decoded", decoded);
                 if (error) {
                     return res.status(401).json({
                         code: 401,
-                        message:
-                            "debe proporcionar un token válido / su token puede estar expirado.",
+                        message: "debe proporcionar un token válido / su token puede estar expirado.",
                     });
                 }
 
@@ -66,7 +64,7 @@ export const verifyToken = (req, res, next) => {
                         });
                     }
                     req.usuario = usuario;
-                    console.log('Token succes verify')
+                    console.log('Token: verificado con exito')
                     next();
                 } catch (error) {
                     res.status(500).json({code: 500, message: "Error en autencicación."})
@@ -81,7 +79,7 @@ export const verifyToken = (req, res, next) => {
     }
 };
 
-export const validarAdmin = async (req, res, next) => {
+export const validateAdmin = async (req, res, next) => {
     let usuario = req.usuario;
 
     if (Boolean(usuario.admin) == false) {
@@ -90,6 +88,6 @@ export const validarAdmin = async (req, res, next) => {
             message: "Usted no tiene los permisos necesarios para continuar.",
         });
     }
-    console.log(`${usuario} is admin`)
+    console.log(`Admin: ${usuario.nombre} es Administrador`)
     next();
 };
