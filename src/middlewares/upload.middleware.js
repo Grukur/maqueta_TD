@@ -5,6 +5,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const uploadFiles = (req, res, next) => {
     try {
         let foto = req.files.foto;
+        let size = foto.size
+        if(size > 2000000){
+            return res.status(400).json({
+                code: 400,
+                message: `Tamaño excede lo permitido, tamaño maximo permitido: 2MB` ,
+            });
+        }
+        console.log('tamaño: ',size)
         let formatosPermitidos = ["jpeg", "png", "webp", "gif", "svg"];
         let extension = `${foto.mimetype.split("/")[1]}`;
 
